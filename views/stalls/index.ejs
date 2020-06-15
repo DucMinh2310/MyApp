@@ -1,0 +1,9 @@
+<%- include("../partials/header.ejs") -%>
+<%
+allStall.forEach(stall => {%>
+<p><%= stall.name %></p>
+<img src="<%= stall.image %>" alt="<%= stall.name %>">
+<p><%= stall.description %></p>
+<%});
+%>
+<%- include("../partials/footer.ejs") -%>
