@@ -1,0 +1,11 @@
+<%- include("../partials/header.ejs") -%>
+
+<form action="/new" method="POST">
+    <input type="text" name="name" placeholder="Tên gian hàng của bạn">
+    <input type="text" name="image" placeholder="Ảnh đại diện gian hàng">
+    <input type="text" name="desc" placeholder="Mô tả chi tiết">
+    <input type="number" min="10000" step="1000" name="price" placeholder="Giá sản phẩm">
+    <button>Submit</button>
+</form>
+
+<%- include("../partials/footer.ejs") -%>

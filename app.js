@@ -8,12 +8,16 @@ const app = express();
 
 const User = require("./models/User");
 
-mongoose.connect("mongodb://localhost/GoodFruit", {
+const authRoutes = require("./routes/auth");
+const stallRoutes = require("./routes/stalls");
+
+mongoose.connect("mongodb://localhost:27017/GoodFruit", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/public"));
 
 /* ========passport configuration========*/
 
@@ -33,26 +37,8 @@ passport.deserializeUser(User.deserializeUser());
 
 /* ========================================*/
 
-const dummy_arr = [
-  {
-    name: "this is a name",
-    image:
-      "https://images.unsplash.com/reserve/Af0sF2OS5S5gatqrKzVP_Silhoutte.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
-    description: "this is a desc",
-  },
-  {
-    name: "this is a name 2",
-    image:
-      "https://images.unsplash.com/reserve/Af0sF2OS5S5gatqrKzVP_Silhoutte.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
-    description: "this is a desc",
-  },
-];
-
-app.get("/", (req, res) => {
-  res.render("stalls/index", {
-    allStall: dummy_arr,
-  });
-});
+app.use(authRoutes);
+app.use(stallRoutes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

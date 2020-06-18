@@ -1,9 +1,25 @@
 <%- include("../partials/header.ejs") -%>
+
+<div class="container">
+    <a href="/new" class="btn btn-success text-white my-5 btn-lg">Create your stall</a>
+</div>
 <%
 allStall.forEach(stall => {%>
-<p><%= stall.name %></p>
-<img src="<%= stall.image %>" alt="<%= stall.name %>">
-<p><%= stall.description %></p>
+<div class="container">
+    <div class="card-columns">
+        <a href="/<%= stall._id %>">
+            <div class="card">
+                <img class="card-img-top" src="<%= stall.image %>" alt="<%= stall.name %>">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <p><%= stall.name %>
+                    </h4>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
 <%});
 %>
+
 <%- include("../partials/footer.ejs") -%>
