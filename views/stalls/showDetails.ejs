@@ -1,11 +1,13 @@
 <%- include("../partials/header") -%>
 
 <div class="container">
-    <div class="card">
-        <img class="card-img-top" src="<%= foundStall.image %>" alt="<%= foundStall.name %>">
+    <div class="card my-4">
+        <img class="card-img-top rounded-top" src="<%= foundStall.image %>" alt="<%= foundStall.name %>">
         <div class="card-body">
-            <h4 class="card-title">Title</h4>
-            <p class="card-text">Body</p>
+            <h3 class="text-capitalize card-title font-weight-bold"><%= foundStall.name %></h3>
+            <p class="card-text lead"><%= foundStall.description %></p>
+            <p class="card-text font-italic font-weight-normal lead">
+                ✭ Giá niêm yết: <%= Intl.NumberFormat().format(foundStall.price) %> Vnd/Kg</p>
         </div>
     </div>
 </div>

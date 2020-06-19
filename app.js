@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const expressSession = require("express-session");
 const passport = require("passport");
 const localStrategy = require("passport-local");
+const methodOverride = require("method-override");
 const app = express();
 
 const User = require("./models/User");
@@ -14,10 +15,12 @@ const stallRoutes = require("./routes/stalls");
 mongoose.connect("mongodb://localhost:27017/GoodFruit", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
 
 /* ========passport configuration========*/
 
@@ -37,8 +40,13 @@ passport.deserializeUser(User.deserializeUser());
 
 /* ========================================*/
 
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 app.use(authRoutes);
-app.use(stallRoutes);
+app.use("/", stallRoutes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
