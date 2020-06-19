@@ -2,18 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Stall = require("../models/Stall");
 
-// get all stalls from db
-router.get("/", (req, res) => {
-  Stall.find({}, (err, allStall) => {
-    if (err) console.log(err);
-    else {
-      res.render("stalls/index", {
-        allStall: allStall,
-      });
-    }
-  });
-});
-
 router.get("/new", (req, res) => {
   res.render("stalls/newStall");
 });
@@ -37,15 +25,17 @@ router.post("/new", (req, res) => {
 // show detail
 router.get("/:id", (req, res) => {
   const id = req.params.id;
-  Stall.findById(id, (err, foundStall) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("stalls/showDetails", {
-        foundStall: foundStall,
-      });
-    }
-  });
+  Stall.findById(id)
+    .populate("comments")
+    .exec((err, foundStall) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("stalls/showDetails", {
+          foundStall: foundStall,
+        });
+      }
+    });
 });
 
 // form edit
@@ -73,7 +63,7 @@ router.put("/:id", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.redirect("/" + updatedStall._id);
+      res.redirect("/stalls/" + updatedStall._id);
     }
   });
 });

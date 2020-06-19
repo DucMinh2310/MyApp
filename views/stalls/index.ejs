@@ -1,13 +1,13 @@
 <%- include("../partials/header.ejs") -%>
 
 <div class="container">
-    <a href="/new" class="btn btn-success text-white my-5 btn-lg">Create your stall</a>
+    <a href="/stalls/new" class="btn btn-success text-white my-5 btn-lg">Create your stall</a>
 </div>
 <%
 allStall.forEach(stall => {%>
 <div class="container">
     <div class="card-columns">
-        <a href="/<%= stall._id %>">
+        <a href="/stalls/<%= stall._id %>">
             <div class="card">
                 <img class="card-img-top" src="<%= stall.image %>" alt="<%= stall.name %>">
                 <div class="card-body">

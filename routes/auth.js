@@ -1,7 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
+const Stall = require("../models/Stall");
 const passport = require("passport");
+
+// get all stalls from db
+router.get("/", (req, res) => {
+  Stall.find({}, (err, allStall) => {
+    if (err) console.log(err);
+    else {
+      res.render("stalls/index", {
+        allStall: allStall,
+      });
+    }
+  });
+});
 
 router.get("/register", (req, res) => {
   res.render("register");

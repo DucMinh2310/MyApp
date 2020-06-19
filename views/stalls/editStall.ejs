@@ -1,5 +1,5 @@
 <%- include("../partials/header") -%>
-<form action="/<%= foundStall._id %>/?_method=PUT" method="POST">
+<form action="/stalls/<%= foundStall._id %>/?_method=PUT" method="POST">
     <input type="text" value="<%= foundStall.name %>" name="name">
     <input type="text" value="<%= foundStall.image %>" name="image">
     <input type="text" value="<%= foundStall.description %>" name="desc">

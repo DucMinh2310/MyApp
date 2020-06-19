@@ -18,6 +18,10 @@ const stallSchema = mongoose.Schema({
       ref: "Comment",
     },
   ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("Stall", stallSchema);
