@@ -15,7 +15,8 @@ const authRoutes = require("./routes/auth");
 const stallRoutes = require("./routes/stalls");
 const commentRoutes = require("./routes/comments");
 
-mongoose.connect("mongodb://localhost:27017/GoodFruit", {
+const urlDB = process.env.DATABASEURL || "mongodb://localhost:27017/GoodFruit";
+mongoose.connect(urlDB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
