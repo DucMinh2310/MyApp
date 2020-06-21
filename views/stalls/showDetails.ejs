@@ -12,6 +12,7 @@
                 <h5 style="font-weight: 600;" class="mt-3">Mô tả sản phẩm: </h5>
                 <p class="card-text lead font-italic text-decoration" style="margin-left: 1em; font-weight: 400;">
                     <%= foundStall.description %></p>
+                <p class="lead">Submitted by <%= foundStall.author.username %></p>
             </div>
             <p class="card-text font-italic font-weight-normal lead float-right">
                 ✭ Giá niêm yết: <%= Intl.NumberFormat().format(foundStall.price) %> Vnd/Kg</p>
@@ -43,7 +44,7 @@
             <span style="color: rgb(153, 145, 145)"
                 class="font-italic"><%= moment(comment.createdAt).fromNow() %></span>
         </div>
-        <p><%= comment.text %></p>
+        <p style="margin-left: 15px; font-weight: 400;" class="lead"><%= comment.text %></p>
         <%   });
         %>
     </div>
